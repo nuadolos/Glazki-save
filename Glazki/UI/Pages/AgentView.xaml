@@ -46,12 +46,13 @@
 
         <ListView Grid.Row="1" 
                   ScrollViewer.CanContentScroll="False"
-                  x:Name="AgentLView" MouseDoubleClick="AgentLView_MouseDoubleClick">
+                  x:Name="AgentLView" MouseDoubleClick="AgentLView_MouseDoubleClick"
+                  SelectionChanged="AgentLView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate>
+                            <ControlTemplate TargetType="ListViewItem">
                                 <Border x:Name="BorderLV" Style="{StaticResource BorderGlazki}">
                                     <Grid Width="1100">
                                         <Grid.ColumnDefinitions>
@@ -66,8 +67,9 @@
                                                    x:Name="LogoPath2" Visibility="Collapsed"/>
 
                                         <Border x:Name="BorderImage" Style="{StaticResource BorderGlazki}"
-                                                HorizontalAlignment="Left" Margin="10">
-                                            <Image Source="{Binding Text, ElementName=LogoPath2}" Width="175" Height="175"/>
+                                                HorizontalAlignment="Left" Margin="10" Width="175" Height="175">
+                                            <Image Source="{Binding Text, ElementName=LogoPath2}"
+                                                   Margin="5"/>
                                         </Border>
 
                                         <StackPanel Grid.Column="1" Margin="10">
@@ -89,6 +91,20 @@
                                             Text="{Binding Discount, StringFormat={}{0}%}" Style="{StaticResource TBlockInLV}"/>
                                     </Grid>
                                 </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding LightGreenDiscount}" Value="true">
+                                        <Setter TargetName="BorderLV" Property="BorderBrush" Value="LightGreen"/>
+                                        <Setter TargetName="BorderLV" Property="BorderThickness" Value="3"/>
+                                        <Setter TargetName="BorderImage" Property="BorderBrush" Value="LightGreen"/>
+                                    </DataTrigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="BorderLV" Property="Background" Value="{StaticResource AdditionalBackground}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="BorderLV" Property="Background" Value="#FFFFB3EA"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>

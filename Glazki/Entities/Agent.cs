@@ -86,6 +86,10 @@ namespace Glazki.Entities
                 return discont;
             }
         }
+        public bool LightGreenDiscount
+        {
+            get => Discount >= 25;
+        }
 
 
         public virtual AgentType AgentType { get; set; }

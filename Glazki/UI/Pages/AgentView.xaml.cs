@@ -121,7 +121,7 @@ namespace Glazki.UI.Pages
 
         private void SearchTBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (SearchTBox.Text != "Введите для поиска" && !string.IsNullOrWhiteSpace(SearchTBox.Text))
+            if (SearchTBox.Text != "Введите для поиска")
             {
                 pagination.Zeroing();
                 SortListView();
@@ -229,6 +229,14 @@ namespace Glazki.UI.Pages
             {
                 SortListView();
             }
+        }
+
+        private void AgentLView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AgentLView.SelectedItems.Count > 1)
+                UpdatePriorityBtn.Visibility = Visibility.Visible;
+            else
+                UpdatePriorityBtn.Visibility= Visibility.Hidden;
         }
 
         #endregion

@@ -5,10 +5,150 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Glazki.UI.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1200"
       Title="AddEditAgent">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <WrapPanel>
+                    <TextBlock Text="Наименование:" Margin="5"
+                               Width="150" TextAlignment="Right"/>
+                    <TextBox Text="{Binding Title}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Тип агента:" Margin="5"
+                               Width="150" TextAlignment="Right"/>
+                    <ComboBox SelectedItem="{Binding AgentType}" x:Name="TypeCBox"
+                              DisplayMemberPath="Title" SelectedValuePath="ID"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Приоритет:" Margin="5" 
+                               Width="150" TextAlignment="Right"/>
+                    <TextBox Text="{Binding Priority}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="ИНН:" Margin="5" 
+                               Width="150" TextAlignment="Right"/>
+                    <TextBox Text="{Binding INN}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="КПП:" Margin="5" 
+                               Width="150" TextAlignment="Right"/>
+                    <TextBox Text="{Binding KPP}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Директор:" Margin="5" 
+                               Width="150" TextAlignment="Right"/>
+                    <TextBox Text="{Binding DirectorName}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Телефон:" Margin="5" 
+                               Width="150" TextAlignment="Right"/>
+                    <TextBox Text="{Binding Phone}"/>
+                </WrapPanel>
+                <WrapPanel>
+                    <TextBlock Text="Email:" Margin="5" 
+                               Width="150" TextAlignment="Right"/>
+                    <TextBox Text="{Binding Email}"/>
+                </WrapPanel>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center">
+                <Border Style="{StaticResource BorderGlazki}"
+                        Width="200" Height="200">
+                    <Image Source="/UI/SystemImage/Глазки-save.png" Margin="5"
+                           x:Name="ImageAgent"/>
+                </Border>
+                <WrapPanel>
+                    <TextBlock Text="Адрес:" Margin="15, 5, 5, 5" 
+                               Width="auto" TextAlignment="Right"/>
+                    <TextBox Text="{Binding Address}" Height="70"
+                             TextWrapping="Wrap"/>
+                </WrapPanel>
+            </StackPanel>
+
+            <Grid x:Name="ProductSalesGrid" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <ListView Width="420" Margin="40, 10, 10, 10"
+                  BorderBrush="{StaticResource AdditionalBackground}"
+                  BorderThickness="3" Height="350"
+                  ScrollViewer.CanContentScroll="False"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  x:Name="ProductSalesLV">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border x:Name="BorderLV" Style="{StaticResource BorderGlazki}">
+                                            <StackPanel Width="175" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Border x:Name="BorderImage" Style="{StaticResource BorderGlazki}"
+                                                     Margin="10" Width="150" Height="150">
+                                                    <Image Source="/UI/SystemImage/picture.png" Margin="5"/>
+                                                </Border>
+
+                                                <TextBlock Text="{Binding Product.Title}" HorizontalAlignment="Center"
+                                                       TextWrapping="Wrap"
+                                                       Style="{StaticResource TBlockInLV}"/>
+                                                <TextBlock Text="{Binding SaleDate, StringFormat={}{0:d}}" Margin="5"
+                                                           Style="{StaticResource TBlockInLV}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding ProductCount, StringFormat=Количество продаж: {0}}"
+                                                           Style="{StaticResource TBlockInLV}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="BorderLV" Property="Background" Value="{StaticResource AdditionalBackground}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="BorderLV" Property="Background" Value="#FFFFB3EA"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+                <WrapPanel Grid.Row="1"
+                           HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Width="30"
+                        x:Name="AddProductSales" Click="AddProductSales_Click">
+                        <Image Source="/UI/SystemImage/AddIcon.png"/>
+                    </Button>
+                    <Button Width="30"
+                        x:Name="DeleteProductSales" Click="DeleteProductSales_Click">
+                        <Image Source="/UI/SystemImage/DeleteIcon.png"/>
+                    </Button>
+                </WrapPanel>
+            </Grid>
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="1" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Сохранить"
+                    x:Name="SaveBtn" Click="SaveBtn_Click"/>
+            <Button Content="Загрузить фото"
+                    x:Name="DownloadImageBtn" Click="DownloadImageBtn_Click"/>
+            <Button Content="Удалить агента" Visibility="Collapsed"
+                    x:Name="DeleteAgentBtn" Click="DeleteAgentBtn_Click"/>
+        </WrapPanel>
     </Grid>
 </Page>

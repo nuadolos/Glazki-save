@@ -124,12 +124,19 @@
     <Compile Include="UI\Pages\AgentView.xaml.cs">
       <DependentUpon>AgentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Windows\AddProductSales.xaml.cs">
+      <DependentUpon>AddProductSales.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Windows\ChangePriority.xaml.cs">
       <DependentUpon>ChangePriority.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Pagination.cs" />
     <Compile Include="Utilities\Transition.cs" />
     <Page Include="UI\Pages\AddEditAgent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Windows\AddProductSales.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -339,6 +346,8 @@
       <DependentUpon>GlazkiModel.edmx</DependentUpon>
       <LastGenOutput>GlazkiModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="UI\SystemImage\AddIcon.png" />
+    <Resource Include="UI\SystemImage\DeleteIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,47 @@
+﻿<Window x:Class="Glazki.UI.Windows.AddProductSales"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Glazki.UI.Windows"
+        mc:Ignorable="d" Icon="/UI/SystemImage/Глазки-save.ico"
+        Title="AddProductSales" 
+        Height="300" Width="450">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Реализация продукта" FontSize="24"/>
+
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WrapPanel>
+                <TextBlock Text="Продукт:" Width="130"
+                           TextAlignment="Right"/>
+                <ComboBox DisplayMemberPath="Title" SelectedItem="{Binding Product}"
+                          x:Name="ProductsCBox"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Дата продажи:" Width="130"
+                           TextAlignment="Right"/>
+                <TextBox Text="{Binding SaleDate, StringFormat={}{0:d}}"/>
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Кол-во продаж:" Width="130"
+                           TextAlignment="Right"/>
+                <TextBox Text="{Binding ProductCount}"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <WrapPanel Grid.Row="2"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Сохранить"
+                    x:Name="SaveBtn" Click="SaveBtn_Click"/>
+            <Button Content="Отмена"
+                    x:Name="CancelBtn" Click="CancelBtn_Click"/>
+        </WrapPanel>
+    </Grid>
+</Window>

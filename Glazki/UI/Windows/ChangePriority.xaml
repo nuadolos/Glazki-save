@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Glazki.UI.Windows"
         mc:Ignorable="d"
-        Title="ChangePriority" Height="450" Width="800">
+        Title="Приоритет" Icon="/UI/SystemImage/Глазки-save.ico"
+        Height="250" Width="410" MinHeight="250" MinWidth="410">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Изменение приоритета" FontSize="24"/>
+
+        <TextBox Grid.Row="1" Width="250"
+                 TextAlignment="Right"
+                 x:Name="PriorityTBox"/>
+
+        <WrapPanel Grid.Row="2">
+            <Button Content="Изменить"
+                x:Name="UpdateBtn" Click="UpdateBtn_Click"/>
+            <Button Content="Отмена"
+                x:Name="CancelBtn" Click="CancelBtn_Click"/>
+        </WrapPanel>
     </Grid>
 </Window>
